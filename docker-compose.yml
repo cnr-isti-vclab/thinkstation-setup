@@ -1,0 +1,33 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    ports:
+      - "9000:9000"   
+      - "9443:9443"   
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+  jupyterhub:
+    build: . 
+    container_name: jupyterhub
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
+      - ./jupyterhub_config.py:/srv/jupyterhub/jupyterhub_config.py
+      - ./images.json:/srv/jupyterhub/images.json
+      - jupyterhub_data:/srv/jupyterhub
+    ports:
+      - "8000:8000"
+    networks:
+      - lab_network
+
+volumes:
+  portainer_data:
+  jupyterhub_data:
+
+networks:
+  lab_network:
+    name: lab_network

@@ -1,0 +1,4 @@
+{
+    "PyTorch & CUDA 12 (Full GPU Environment)": "cschranz/gpu-jupyter:v1.10_cuda-12.9_ubuntu-24.04_python-only",
+    "Data Science Base (Python, R, Julia - CPU Only)": "jupyter/datascience-notebook:latest"
+}
