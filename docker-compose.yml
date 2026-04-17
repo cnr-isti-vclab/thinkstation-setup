@@ -19,6 +19,7 @@ services:
       - ./jupyterhub_config.py:/srv/jupyterhub/jupyterhub_config.py
       - ./images.json:/srv/jupyterhub/images.json
       - jupyterhub_data:/srv/jupyterhub
+      - /data/jupyterhub:/data/jupyterhub
     ports:
       - "8000:8000"
     networks:
