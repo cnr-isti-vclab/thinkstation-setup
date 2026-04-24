@@ -9,6 +9,6 @@
 - ⚙️ System Management:
     - Portainer:
         icon: portainer
-        href: "http://{{HOMEPAGE_VAR_THINKSTATION_IP}}:9443"
+        href: "http://{{HOMEPAGE_VAR_THINKSTATION_IP}}:9000"
         description: "Docker Control Panel"
-        ping: "http://{{HOMEPAGE_VAR_THINKSTATION_IP}}:9443"
+        ping: "http://{{HOMEPAGE_VAR_THINKSTATION_IP}}:9000"
