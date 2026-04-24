@@ -57,7 +57,7 @@ def options_form(spawner):
         <input type="text" name="custom_image" id="custom_image" class="form-control"
                placeholder="e.g. registry.example.com/myimage:tag">
         <small class="form-text text-muted">
-            If specified, the custom image overrides the selection above.
+            If specified, the custom image overrides the selection above.<br>
             A list of available images can be found at
             <a href="https://github.com/jupyter/docker-stacks" target="_blank">
                 github.com/jupyter/docker-stacks
