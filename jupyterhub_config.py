@@ -79,6 +79,8 @@ c.DockerSpawner.options_from_form = options_from_form
 c.DockerSpawner.notebook_dir = '/home/jovyan/work'
 c.DockerSpawner.network_name = 'lab_network'
 c.DockerSpawner.remove = True
+c.DockerSpawner.environment = {'GRANT_SUDO': 'yes'}
+c.DockerSpawner.extra_create_kwargs = {'user': 'root'}
 
 c.DockerSpawner.extra_host_config = {
     'device_requests': [
