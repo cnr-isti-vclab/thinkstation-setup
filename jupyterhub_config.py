@@ -1,6 +1,12 @@
 import json
 import os
+import re
 c = get_config()
+
+# Validates a Docker image reference (registry/name:tag or @digest)
+_DOCKER_IMAGE_RE = re.compile(
+    r'^[a-zA-Z0-9][a-zA-Z0-9._\-/:@]*$'
+)
 
 # ==========================================
 # 1. AUTHENTICATION (FirstUse Authenticator)
@@ -46,11 +52,21 @@ def options_form(spawner):
         <select name="image" id="image" class="form-control">
             {options_html}
         </select>
+        <br>
+        <label for="custom_image">Or enter a custom image (optional):</label><br>
+        <input type="text" name="custom_image" id="custom_image" class="form-control"
+               placeholder="e.g. registry.example.com/myimage:tag">
+        <small class="form-text text-muted">
+            If specified, the custom image overrides the selection above.
+        </small>
     '''
 
 def options_from_form(formdata):
     # Use 'selected_image' instead of 'image' to avoid DockerSpawner's
     # built-in image validation, which requires allowed_images to be set.
+    custom = (formdata.get('custom_image', ['']) or [''])[0].strip()
+    if custom:
+        return {'selected_image': custom}
     return {'selected_image': formdata.get('image', [None])[0]}
 
 c.DockerSpawner.options_form = options_form
@@ -100,9 +116,19 @@ def pre_spawn_hook(spawner):
     selected_image = spawner.user_options.get('selected_image')
     if selected_image:
         with open(_images_path) as f:
-            allowed = list(json.load(f).values())
+            images = json.load(f)
+        allowed = list(images.values())
         if selected_image not in allowed:
-            raise Exception(f"Image '{selected_image}' is not in the allowed list.")
+            # Custom image: validate that it is a well-formed Docker image reference
+            if not _DOCKER_IMAGE_RE.match(selected_image):
+                raise Exception(
+                    f"Invalid Docker image name: '{selected_image}'. "
+                    "Only alphanumerics, '.', '-', '_', '/', ':', '@' are allowed."
+                )
+            # Persist the new image in images.json so it appears in future dropdowns
+            images[selected_image] = selected_image
+            with open(_images_path, 'w') as f:
+                json.dump(images, f, indent=4)
         spawner.image = selected_image
 
 c.Spawner.pre_spawn_hook = pre_spawn_hook
