@@ -1,0 +1,8 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- Configuration:
+    - ThinkStation Setup:
+        - abbr: GH
+          href: https://github.com/cnr-isti-vclab/thinkstation-setup
