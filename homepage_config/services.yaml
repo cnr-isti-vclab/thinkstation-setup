@@ -2,13 +2,13 @@
 - 🔬 Machine Learning:
     - JupyterHub:
         icon: jupyter
-        href: "https://{{THINKSTATION_IP}}:8000"
+        href: "http://{{HOMEPAGE_VAR_THINKSTATION_IP}}:8000"
         description: "JupyterHub"
-        ping: "https://{{THINKSTATION_IP}}:8000"
+        ping: "http://{{HOMEPAGE_VAR_THINKSTATION_IP}}:8000"
 
 - ⚙️ System Management:
     - Portainer:
         icon: portainer
-        href: "https://{{THINKSTATION_IP}}:9443"
+        href: "http://{{HOMEPAGE_VAR_THINKSTATION_IP}}:9443"
         description: "Docker Control Panel"
-        ping: "https://{{THINKSTATION_IP}}:9443"
+        ping: "http://{{HOMEPAGE_VAR_THINKSTATION_IP}}:9443"

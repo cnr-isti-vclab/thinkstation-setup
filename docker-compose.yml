@@ -37,7 +37,7 @@ services:
       - ./homepage_config:/app/config
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-      - THINKSTATION_IP=${THINKSTATION_IP}
+      - HOMEPAGE_VAR_THINKSTATION_IP=${THINKSTATION_IP}
       - HOMEPAGE_ALLOWED_HOSTS=${THINKSTATION_IP},localhost,127.0.0.1
     networks:
       - lab_network
